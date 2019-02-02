@@ -24,4 +24,32 @@ router.get('/show/:id', (req, res, next) => {
     });
 });
 
+router.get('/new', (req, res, next) => {
+  res.render('celebrities/new');
+});
+
+router.post('/new', (req, res, next) => {
+  const { name, occupation, catchphrase } = req.body;
+  const newCelebrity = new Celebrity({ name, occupation, catchphrase });
+  console.log('Made it');
+  newCelebrity.save()
+    .then((celeb) => {
+      res.redirect('/');
+    })
+    .catch((error) => {
+      console.log(error);
+      res.redirect('/new');
+    });
+});
+
+router.post('/delete/:id', (req, res, next) => {
+  Celebrity.findByIdAndRemove({'_id': req.body.id})
+    .then(() => {
+      res.redirect('/');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
+
 module.exports = router;

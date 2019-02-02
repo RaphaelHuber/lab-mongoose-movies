@@ -1,9 +1,6 @@
-<h2>WAS QUOI</h2>
-
-<div class="row">
-  {{#each celeb}}
-    <div>
-      <a href="celebritiesindex/show/{{this.id}}">{{this.name}}</a>
-    </div>
-  {{/each}}
-</div>
+<h2>Celebrity List</h2>
+{{#each celeb}}
+  <p><a href="/celebritiesindex/show/{{this._id}}">{{this.name}}</a> # 
+  <a href="/celebrities/delete/{{this._id}}">Delete</a></p>
+{{/each}}
+<a href="/celebritiesindex/new">ADD</a>
